@@ -116,7 +116,7 @@ class RegisterPage extends React.Component {
                     console.log('local storage token ' + this.state.userToken);
                     //does this need to match login page state, so dashboar can get user out ok then  dispaly ?
                     this.setState({
-                        userToken: dataObject.data.addUser.access_token,
+                        // userToken: dataObject.data.addUser.access_token,
                         newUser: dataObject.data.addUser,
                         currentUserEmail: dataObject.data.email,
                         redirect: true
@@ -145,7 +145,7 @@ class RegisterPage extends React.Component {
                 <HomepageHeader />
                 <div className="createUserForm pageBodyContent">
 
-                    <div class="box_basic_top">
+                    <div className="box_basic_top">
                         <form onSubmit={this.formSubmission}>
 
                             <h2>Register New User</h2>
@@ -203,7 +203,7 @@ class RegisterPage extends React.Component {
 
                                 <Link to="/login" className="cancelFormSubmit">CANCEL</Link>
                             </div>
-                            
+
                         </form>
                     </div>
           
