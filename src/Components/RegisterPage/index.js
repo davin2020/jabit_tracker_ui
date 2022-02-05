@@ -5,6 +5,8 @@ import HomepageHeader from "../HomepageHeader";
 //Redirect has been replaced with Navigate
 import { Link, Navigate } from "react-router-dom";
 
+const PROD_API_URL = 'https://davin-jabit-api.herokuapp.com/graphql';
+
 class RegisterPage extends React.Component {
     constructor(props) {
         super(props);
@@ -90,7 +92,7 @@ class RegisterPage extends React.Component {
                 }
                 `;
 
-            fetch('http://localhost:4033/graphql', {
+            fetch(PROD_API_URL, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({query: queryStringAddUser})

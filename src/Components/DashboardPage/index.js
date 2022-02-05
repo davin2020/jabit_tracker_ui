@@ -6,6 +6,7 @@ import './style.css'
 import { Route, Navigate } from 'react-router-dom';
 // import  UserContext from "../../UserContext";
 
+const PROD_API_URL = 'https://davin-jabit-api.herokuapp.com/graphql';
 
 class DashboardPage extends React.Component {
     constructor(props) {
@@ -48,7 +49,7 @@ class DashboardPage extends React.Component {
             `;
 
         //fetch one user
-        fetch('http://localhost:4033/graphql', {
+        fetch(PROD_API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({query: queryString})

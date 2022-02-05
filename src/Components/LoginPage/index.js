@@ -5,6 +5,18 @@ import HomepageHeader from "../HomepageHeader";
 import { Link, Navigate } from "react-router-dom";
 // import UserContext from "../../UserContext";
 
+// require('dotenv').config();
+
+// const API_URL = 'http://localhost:4033/graphql';
+const PROD_API_URL = 'https://davin-jabit-api.herokuapp.com/graphql';
+// const PROD_API_URL = process.env.PROD_API_URL;
+
+//URL to fetch depends  on if we're in prod or local
+// if (process.env.NODE_ENV === 'production') {
+// 	API_URL = process.env.PROD_API_URL;
+// 	API_URL = 'https://davin-jabit-api.herokuapp.com/graphql';
+// }
+
 // import { Navigate } from "react-router-dom";
 
 // return (
@@ -73,8 +85,9 @@ class LoginPage extends React.Component {
 				}
 			`;
 
-		//fetch one user
-		fetch('http://localhost:4033/graphql', {
+		//fetch one user LIVE_API
+		// fetch('http://localhost:4033/graphql', {
+		fetch(PROD_API_URL, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({query: queryString})
