@@ -16,7 +16,7 @@ import RegisterPage from "./Components/RegisterPage";
 // import { Route, Link, BrowserRouter as Router, Switch} from 'react-router-dom';
 import { Route, Link, BrowserRouter as Router, Routes} from 'react-router-dom';
 
-//my routing here
+//protected routes here - if email or token is deleted from local storage, then other pages redirect to /login route
 class Routing extends React.Component {
     render() {
         return (
