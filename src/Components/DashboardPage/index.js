@@ -6,6 +6,7 @@ import './style.css'
 import { Route, Navigate } from 'react-router-dom';
 // import  UserContext from "../../UserContext";
 
+
 class DashboardPage extends React.Component {
     constructor(props) {
         super(props);
@@ -76,7 +77,7 @@ class DashboardPage extends React.Component {
 
     render() {
         // localStorage.getItem('email')==null || (localStorage.getItem('access_token')==null)
-        if (localStorage.getItem('email')==null || (localStorage.getItem('access_token')==null)) {
+        if ( localStorage.getItem('email')==null || localStorage.getItem('access_token')==null || localStorage.getItem('access_token')==undefined ) {
             //redirecet to /home
             return (<Navigate to="/login" />)
             // 61fc511f67cde45b3477dfd9 tango foxtrot
@@ -93,25 +94,20 @@ class DashboardPage extends React.Component {
 
                     <h1 className="usernameHeader">Dashboard: {this.state.currentUser.fullname}</h1>
 
-                    <details>
+                    <details open>
                         <summary id="myProfile">
-                            <h2 class="section__title">Profile</h2>
+                            <h2 className="section__title">Profile</h2>
                         </summary>
 
                         {/*  new stuff */}
-                        <div class="section_parent"> 
-                            <div class="section_child">
+                        <div className="section_parent"> 
+                            <div className="section_child">
                                 {/* 
-                                <div class="box_basic_top accent_bkg">
+                                <div className="box_basic_top accent_bkg">
                                     <h3>stuff</h3>
                                 </div>
                                 */}
-                                <div class="box_basic_top">
-                                    <h3 className="bioHeader">Email:</h3>
-                                    <p className="bioContent">
-                                        {this.state.currentUser.email}
-                                    </p>
-
+                                <div className="box_basic_top">
                                     <p className="bioContent">ID: 
                                         {this.state.currentUser._id}
                                     </p>
@@ -121,6 +117,11 @@ class DashboardPage extends React.Component {
                                         {/*    {this.state.currentUser.dream_job}
                                     fyi cannnot use dataobject here - {dataObject.data.user.fullname}  */}
                                         {this.state.currentUser.fullname}
+                                    </p>
+
+                                    <h3 className="bioHeader">Email:</h3>
+                                    <p className="bioContent">
+                                        {this.state.currentUser.email}
                                     </p>
 
                                     <h3 className="bioHeader">Dream Job:</h3>
@@ -153,16 +154,16 @@ class DashboardPage extends React.Component {
                 
                 <details>
                     <summary id="myGoals">
-                        <h2 class="section__title">Goals</h2>
+                        <h2 className="section__title">Goals</h2>
                     </summary>
-                        <div class="section_parent"> 
-                            <div class="section_child">
+                        <div className="section_parent"> 
+                            <div className="section_child">
                                 {/* 
-                                <div class="box_basic_top accent_bkg">
+                                <div className="box_basic_top accent_bkg">
                                     <h3>stuff</h3>
                                 </div>
                                 */}
-                                <div class="box_basic_top">
+                                <div className="box_basic_top">
                                     <h3 className="bioHeader">blurb about Goals:</h3>
                                     <p className="bioContent">
                                        
