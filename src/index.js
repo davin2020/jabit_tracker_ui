@@ -16,6 +16,7 @@ import RegisterPage from "./Components/RegisterPage";
 // import { Route, Link, BrowserRouter as Router, Switch} from 'react-router-dom';
 import { Route, Link, BrowserRouter as Router, Routes} from 'react-router-dom';
 
+
 //protected routes here - if email or token is deleted from local storage, then other pages redirect to /login route
 class Routing extends React.Component {
     render() {
@@ -42,6 +43,7 @@ class Routing extends React.Component {
                             <Route path='/login' element={<LoginPage/>} />
                             <Route path='/register' element={<RegisterPage/>} />
                             <Route path='/dashboard' element={<DashboardPage/>} />
+                            <Route path='/dashboard#myProfile' element={<DashboardPage/>} />
                         </Routes>
                     </div>
                 </Router>
