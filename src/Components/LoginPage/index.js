@@ -5,7 +5,6 @@ import HomepageHeader from "../HomepageHeader";
 import { Link, Navigate } from "react-router-dom";
 // import UserContext from "../../UserContext";
 
-
 // import { Navigate } from "react-router-dom";
 
 // return (
@@ -85,14 +84,20 @@ class LoginPage extends React.Component {
 		})
 			.then((dataObject) => {
 				//need to cheeck if whats returned is an error or valid user?
+
 				if (!dataObject.errors) {
+					//ths is now NULL when using hosted Heroku backend
+					console.log('dataobject data ');
+                	console.log(dataObject.data);
+                	console.log(dataObject.data.loginEmailAddress.access_token);
 
 					//clear previous local storage before setting state for new user!
 					localStorage.clear();
-					localStorage.setItem('username', inputUsername );
+					// localStorage.setItem('username', inputUsername );
 					localStorage.setItem('email', inputUsername );
 
-					localStorage.setItem('access_token', this.state.userToken);
+					// localStorage.setItem('access_token', this.state.userToken);
+					localStorage.setItem('access_token', dataObject.data.loginEmailAddress.access_token);
 
 					this.setState({
 						//migh give errors?
@@ -128,7 +133,7 @@ class LoginPage extends React.Component {
 				<HomepageHeader />
             	<div className="pageBodyContent">
 
-            		<div class="box_basic_top">
+            		<div className="box_basic_top">
 						<div className="loginForm">
 							<form onSubmit={this.handleSubmit}>
 								<h2>Log In</h2>
@@ -160,7 +165,7 @@ class LoginPage extends React.Component {
 							</div>
 						</div>
 					</div>
-					
+
             	</div>
 			</div>
 		)
