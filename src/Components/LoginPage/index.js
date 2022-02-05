@@ -125,41 +125,43 @@ class LoginPage extends React.Component {
 	render() {
 		return (
 			<div>
-			<HomepageHeader />
-            <div className="bodyContent">
+				<HomepageHeader />
+            	<div className="pageBodyContent">
 
-				<div className="loginForm">
-					<form onSubmit={this.handleSubmit}>
-						<h2>Log In</h2>
-						<label>Email Address:
-                    		<input className="loginInputs" id="inputUsername" name="inputUsername" type="text" required placeholder="Email Addreess" value={this.state.usernameValue} onChange={this.handleChangeUsername} ></input>
-                    	</label>
-                    	<br></br>
-                    	<label>Password: 
-                    	<input className="loginInputs" id="inputPassword" name="inputPassword" type="password" placeholder="Password" value={this.state.passwordValue} onChange={this.handleChangePassword} ></input>
-                    	</label>
+            		<div class="box_basic_top">
+						<div className="loginForm">
+							<form onSubmit={this.handleSubmit}>
+								<h2>Log In</h2>
+								<label>Email Address:
+		                    		<input className="loginInputs" id="inputUsername" name="inputUsername" type="text" required placeholder="Email Addreess" value={this.state.usernameValue} onChange={this.handleChangeUsername} ></input>
+		                    	</label>
+		                    	<br></br>
+		                    	<label>Password: 
+		                    	<input className="loginInputs" id="inputPassword" name="inputPassword" type="password" placeholder="Password" value={this.state.passwordValue} onChange={this.handleChangePassword} ></input>
+		                    	</label>
 
-						<div className="loginPageButtons">
-						{/* 
-				        JSX React comment here 
-				        BUG for somem reason, redirecting to /login then redirects you to /dashboard
-				        */}
-							<button className="loginButton" onClick={ this.startLogin }>Submit</button>
-							
-								{(this.state.redirect) ? <Navigate to={{
-									pathname: '/dashboard',
-									state: { userToken: localStorage.getItem('access_token') }
-								}} /> : "" }
+									<div className="loginPageButtons">
+									{/* 
+							        JSX React comment here 
+							        BUG for somem reason, redirecting to /login then redirects you to /dashboard
+							        */}
+										<button className="loginButton" onClick={ this.startLogin }>Submit</button>
+										
+											{(this.state.redirect) ? <Navigate to={{
+												pathname: '/dashboard',
+												state: { userToken: localStorage.getItem('access_token') }
+											}} /> : "" }
+									</div>
+							</form>
+
+							<h2>Register</h2>
+							<div className="createAccountButton">
+								<Link to="/register">Register</Link>
+							</div>
 						</div>
-					</form>
-
-					<h2>Register</h2>
-						<div className="createAccountButton">
-							<Link to="/register">Register</Link>
-						</div>
-
-				</div>
-            </div>
+					</div>
+					
+            	</div>
 			</div>
 		)
 	}

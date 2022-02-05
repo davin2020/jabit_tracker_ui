@@ -6,8 +6,8 @@ class HomepageHeader extends React.Component {
       return (
           //changed from class to className
           <div className="homepageHeader">
-              <h1>Welcome to Jabit Tracker</h1>
-              <h2>Job + Habit = Jabit Tracker.</h2>
+              <h1 className="appTitle">Welcome to Jabit Tracker</h1>
+              <h2 className="appSubTitle">Job + Habit = Jabit Tracker.</h2>
           </div>
       )
     }

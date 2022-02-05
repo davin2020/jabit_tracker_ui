@@ -1,5 +1,6 @@
 import React from "react";
 // import './style.css';
+import HomepageHeader from "../HomepageHeader";
 // import { Link, Redirect } from "react-router-dom";
 //Redirect has been replaced with Navigate
 import { Link, Navigate } from "react-router-dom";
@@ -140,65 +141,73 @@ class RegisterPage extends React.Component {
 
     render() {
         return (
-            <div className="createUserForm">
-                <form onSubmit={this.formSubmission}>
+            <div>
+                <HomepageHeader />
+                <div className="createUserForm pageBodyContent">
 
-                    <h2>Register New User</h2>
-                    <label>Email Address:
-                    <input className="emailInput" type="text" placeholder="Email:" name="inputNewEmail"
-                           value={this.state.inputNewEmail} onChange={this.handleInputChange}></input>
-                    </label>
-                    <br></br>
+                    <div class="box_basic_top">
+                        <form onSubmit={this.formSubmission}>
 
-                    <label>Password: 
-                    <input className="passwordInput" type="password" placeholder="Password:" name="inputNewPassword"
-                           value={this.state.inputNewPassword} onChange={this.handleInputChange}></input>
-                    </label>
-                    <p className="requirementsHeader">Password must:</p>
-                    <div className="requirementsText">
-                        <p>+ Be between 6 to 20 characters</p>
-                        <p>+ Contain at least one number</p>
-                        <p>+ Contain at lease one Uppercase and Lowercase character</p>
+                            <h2>Register New User</h2>
+                            <label>Email Address:
+                            <input className="emailInput" type="text" placeholder="Email:" name="inputNewEmail"
+                                   value={this.state.inputNewEmail} onChange={this.handleInputChange}></input>
+                            </label>
+                            <br></br>
+
+                            <label>Password: 
+                            <input className="passwordInput" type="password" placeholder="Password:" name="inputNewPassword"
+                                   value={this.state.inputNewPassword} onChange={this.handleInputChange}></input>
+                            </label>
+                            <p className="requirementsHeader">Password must:</p>
+                            <div className="requirementsText">
+                                <p>+ Be between 6 to 20 characters</p>
+                                <p>+ Contain at least one number</p>
+                                <p>+ Contain at lease one Uppercase and Lowercase character</p>
+                            </div>
+                            <br></br>
+
+                            <div>
+                                <label>Fullname: 
+                                <input className="usernameFullname" type="text" placeholder="Fullname" name="inputNewFullname"
+                                       value={this.state.inputNewFullname} onChange={this.handleInputChange}></input>
+                                </label>
+                            </div>
+                            {/*
+                            <p className="requirementsHeader">Username must:</p>
+                            <div className="requirementsText">
+                                <p className="requirementsText">+ Be between 1 and 14 characters</p>
+                                <p className="requirementsText">+ Be unique (not already taken)</p>
+                            </div>
+                            */}
+
+                            <label>Whats Your Dream Job? (Optional)</label>
+                            <textarea placeholder="Max 500 characters" name="inputNewDreamJob" value={this.state.inputNewDreamJob}
+                                      onChange={this.handleInputChange}></textarea>
+
+                            <br></br>
+                            <label>Whats Your Motivation to get this Job? (Optional)</label>
+                            <textarea placeholder="Max 500 characters" name="inputNewMotivation" value={this.state.inputNewMotivation}
+                                      onChange={this.handleInputChange}></textarea>
+
+
+                            <div className="createAccountButtonContainer">
+                                {/*<Link to="/dashboard" className="confirmFormSubmit" type="submit">SUBMIT</Link> 
+                                Added IMP LINE ABOUT getting userToken but where is it beign set?
+                                */}
+                                <button type="submit" value="Submit" className="confirmFormSubmit">SUBMIT</button>
+                                {(this.state.redirect) ? <Navigate to={{
+                                    pathname: '/dashboard',
+                                    state: { userToken: localStorage.getItem('access_token') }
+                                }}/> : ""}
+
+                                <Link to="/login" className="cancelFormSubmit">CANCEL</Link>
+                            </div>
+                            
+                        </form>
                     </div>
-                    <br></br>
-
-                    <div>
-                        <label>Fullname: 
-                        <input className="usernameFullname" type="text" placeholder="Fullname" name="inputNewFullname"
-                               value={this.state.inputNewFullname} onChange={this.handleInputChange}></input>
-                        </label>
-                    </div>
-                    {/*
-                    <p className="requirementsHeader">Username must:</p>
-                    <div className="requirementsText">
-                        <p className="requirementsText">+ Be between 1 and 14 characters</p>
-                        <p className="requirementsText">+ Be unique (not already taken)</p>
-                    </div>
-                */}
-
-                    <label>Whats Your Dream Job? (Optional)</label>
-                    <textarea placeholder="Max 500 characters" name="inputNewDreamJob" value={this.state.inputNewDreamJob}
-                              onChange={this.handleInputChange}></textarea>
-
-                    <br></br>
-                    <label>Whats Your Motivation to get this Job? (Optional)</label>
-                    <textarea placeholder="Max 500 characters" name="inputNewMotivation" value={this.state.inputNewMotivation}
-                              onChange={this.handleInputChange}></textarea>
-
-
-                    <div className="createAccountButtonContainer">
-                        {/*<Link to="/dashboard" className="confirmFormSubmit" type="submit">SUBMIT</Link> 
-                        Added IMP LINE ABOUT getting userToken but where is it beign set?
-                        */}
-                        <button type="submit" value="Submit" className="confirmFormSubmit">SUBMIT</button>
-                        {(this.state.redirect) ? <Navigate to={{
-                            pathname: '/dashboard',
-                            state: { userToken: localStorage.getItem('access_token') }
-                        }}/> : ""}
-
-                        <Link to="/login" className="cancelFormSubmit">CANCEL</Link>
-                    </div>
-                </form>
+          
+                </div>
             </div>
         )
     }
