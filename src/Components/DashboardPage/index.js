@@ -22,12 +22,13 @@ class DashboardPage extends React.Component {
         //check token - why is props still undefined??
         // state: { userToken: localStorage.getItem('access_token') }
 
-        if (localStorage.getItem('username')==null || (localStorage.getItem('access_token')==null)) {
+        if (localStorage.getItem('email')==null || (localStorage.getItem('access_token')==null)) {
             //redirecet to /home
             return <Navigate to="/login" />
         }
 
         let userEmail = localStorage.getItem('email') ;
+        console.log('DASHBOARD the email is: ' + userEmail);
         // need to ask for ALL the fields that u want access to here!
         const queryString = `
             query {
@@ -92,7 +93,8 @@ class DashboardPage extends React.Component {
                     <p className="bioContent">
                         {this.state.currentUser.email}
                     </p>
-                    <p className="bioContent">
+
+                    <p className="bioContent">ID: 
                         {this.state.currentUser._id}
                     </p>
 
