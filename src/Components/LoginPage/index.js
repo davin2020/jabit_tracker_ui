@@ -41,8 +41,7 @@ class LoginPage extends React.Component {
 
 
 	handleSubmit(event) {
-		alert('A name was submitted: ' + this.state.usernameValue);
-		alert('A name was submitted: ' + this.state.passwordValue);
+		// alert('A name was submitted: ' + this.state.usernameValue);
 		event.preventDefault();
 	}
 
@@ -53,9 +52,6 @@ class LoginPage extends React.Component {
 		})
 	}
 
-
-
-//functions go here
 	startLogin = (event) => {
 		event.preventDefault();
 		//get vars from form
@@ -83,15 +79,15 @@ class LoginPage extends React.Component {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({query: queryString})
-		}).
-		then((response) => {
+		})
+		.then((response) => {
 			return response.json()
 		})
 			.then((dataObject) => {
 				//need to cheeck if whats returned is an error or valid user?
 				if (!dataObject.errors) {
 
-//clear previous local storage before setting state for new user!
+					//clear previous local storage before setting state for new user!
 					localStorage.clear();
 					localStorage.setItem('username', inputUsername );
 					localStorage.setItem('email', inputUsername );
@@ -102,6 +98,7 @@ class LoginPage extends React.Component {
 						//migh give errors?
 						// userToken: dataObject.data.email.access_token,
 						learners: dataObject.data.email,
+						currentUserEmail: dataObject.data.email,
 						redirect: true
 					})
 
@@ -115,13 +112,16 @@ class LoginPage extends React.Component {
 				}
 				//ELSE theres some issues with the data returned from the query
 				else {
+					//how to deal with this on login page itself? its currently uncaught
+					// throw new Error('Incorrect username or password, please try again')
+					console.log('Incorrect username or password, please try again');
 				}
 			})
 	}
 
 
 	//REMINDER it doent like comments within this render() block !
-
+	// jsx needs clsoing tags for input fields!
 	render() {
 		return (
 			<div>
@@ -131,24 +131,33 @@ class LoginPage extends React.Component {
 				<div className="loginForm">
 					<form onSubmit={this.handleSubmit}>
 						<h2>Log In</h2>
-                    	<input className="loginInputs" id="inputUsername" name="inputUsername" type="text" placeholder="Username:" value={this.state.usernameValue} onChange={this.handleChangeUsername} ></input>
-                    	<input className="loginInputs" id="inputPassword" name="inputPassword" type="password" placeholder="Password:" value={this.state.passwordValue} onChange={this.handleChangePassword} ></input>
+						<label>Email Address:
+                    		<input className="loginInputs" id="inputUsername" name="inputUsername" type="text" required placeholder="Email Addreess" value={this.state.usernameValue} onChange={this.handleChangeUsername} ></input>
+                    	</label>
+                    	<br></br>
+                    	<label>Password: 
+                    	<input className="loginInputs" id="inputPassword" name="inputPassword" type="password" placeholder="Password" value={this.state.passwordValue} onChange={this.handleChangePassword} ></input>
+                    	</label>
 
 						<div className="loginPageButtons">
 						{/* 
 				        JSX React comment here 
+				        BUG for somem reason, redirecting to /login then redirects you to /dashboard
 				        */}
-						<button className="loginButton" onClick={ this.startLogin }>Submit</button>
-						
-							{(this.state.redirect) ? <Navigate to={{
-								pathname: '/dashboard',
-								state: { userToken: localStorage.getItem('access_token') }
-							}} /> : "" }
-
-		
+							<button className="loginButton" onClick={ this.startLogin }>Submit</button>
 							
+								{(this.state.redirect) ? <Navigate to={{
+									pathname: '/dashboard',
+									state: { userToken: localStorage.getItem('access_token') }
+								}} /> : "" }
 						</div>
 					</form>
+
+					<h2>Register</h2>
+						<div className="createAccountButton">
+							<Link to="/register">Register</Link>
+						</div>
+
 				</div>
             </div>
 			</div>
@@ -156,7 +165,3 @@ class LoginPage extends React.Component {
 	}
 }
 export default LoginPage;
-
-// <div className="createAccountButton">
-	// <Link to="/createaccount">CREATE ACCOUNT</Link>
-// </div>
