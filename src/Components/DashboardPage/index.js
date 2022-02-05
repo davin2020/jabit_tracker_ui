@@ -1,5 +1,6 @@
 import React from 'react';
 import HomepageHeader from "../HomepageHeader";
+import './style.css'
 
 //Redirect has been replaced with Navigate
 import { Route, Navigate } from 'react-router-dom';
@@ -74,54 +75,103 @@ class DashboardPage extends React.Component {
     } // eof componentDidMount
 
     render() {
-        if (localStorage.getItem('email')==null) {
+        // localStorage.getItem('email')==null || (localStorage.getItem('access_token')==null)
+        if (localStorage.getItem('email')==null || (localStorage.getItem('access_token')==null)) {
             //redirecet to /home
             return (<Navigate to="/login" />)
             // 61fc511f67cde45b3477dfd9 tango foxtrot
         }
+        //below div was - <div className="userPageContent">
         else {
             return (
-                <div className="userPageContent">
+                <div className="pageBodyContent">
                     <div>
                         <HomepageHeader /> 
                     </div>
-                <h1 className="usernameHeader">Dashboard: {this.state.currentUser.fullname}</h1>
 
-                <div className="bioContentContainer">
+                <div className="bioContentContainer dashboardContainer">
 
-                    <h3 className="bioHeader">Email:</h3>
-                    <p className="bioContent">
-                        {this.state.currentUser.email}
-                    </p>
+                    <h1 className="usernameHeader">Dashboard: {this.state.currentUser.fullname}</h1>
 
-                    <p className="bioContent">ID: 
-                        {this.state.currentUser._id}
-                    </p>
+                    <details>
+                        <summary id="myProfile">
+                            <h2 class="section__title">Profile</h2>
+                        </summary>
 
-                    <h3 className="bioHeader">Fullname:</h3>
-                    <p className="bioContent">
-                        {/*    {this.state.currentUser.dream_job}
-                    fyi cannnot use dataobject here - {dataObject.data.user.fullname}  */}
-                        {this.state.currentUser.fullname}
-                    </p>
+                        {/*  new stuff */}
+                        <div class="section_parent"> 
+                            <div class="section_child">
+                                {/* 
+                                <div class="box_basic_top accent_bkg">
+                                    <h3>stuff</h3>
+                                </div>
+                                */}
+                                <div class="box_basic_top">
+                                    <h3 className="bioHeader">Email:</h3>
+                                    <p className="bioContent">
+                                        {this.state.currentUser.email}
+                                    </p>
 
-                    <h3 className="bioHeader">Dream Job:</h3>
-                    <p className="bioContent">
-                        {/*    {this.state.currentUser.dream_job}*/}
-                        {this.state.currentUser.dream_job}
-                    </p>
+                                    <p className="bioContent">ID: 
+                                        {this.state.currentUser._id}
+                                    </p>
 
-                    <h3 className="bioHeader">Motivation:</h3>
-                    <p className="bioContent">
-                        {/*    {this.state.currentUser.dream_job}*/}
-                        {this.state.currentUser.motivation}
-                    </p>
-                    
-                    <h3 className="bioHeader">Total Points:</h3>
-                    <p className="bioContent">
-                        {/*    {this.state.currentUser.dream_job}*/}
-                        {this.state.currentUser.total_points}
-                    </p>
+                                    <h3 className="bioHeader">Fullname:</h3>
+                                    <p className="bioContent">
+                                        {/*    {this.state.currentUser.dream_job}
+                                    fyi cannnot use dataobject here - {dataObject.data.user.fullname}  */}
+                                        {this.state.currentUser.fullname}
+                                    </p>
+
+                                    <h3 className="bioHeader">Dream Job:</h3>
+                                    <p className="bioContent">
+                                        {/*    {this.state.currentUser.dream_job}*/}
+                                        {this.state.currentUser.dream_job}
+                                    </p>
+
+                                    <h3 className="bioHeader">Motivation:</h3>
+                                    <p className="bioContent">
+                                        {/*    {this.state.currentUser.dream_job}*/}
+                                        {this.state.currentUser.motivation}
+                                    </p>
+                                    
+                                    <h3 className="bioHeader">Total Points:</h3>
+                                    <p className="bioContent">
+                                        {/*    {this.state.currentUser.dream_job}*/}
+                                        {this.state.currentUser.total_points}
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    </details>
+                </div> 
+
+                <div className="bioContentContainer goalContainer">
+                
+                <details>
+                    <summary id="myGoals">
+                        <h2 class="section__title">Goals</h2>
+                    </summary>
+                        <div class="section_parent"> 
+                            <div class="section_child">
+                                {/* 
+                                <div class="box_basic_top accent_bkg">
+                                    <h3>stuff</h3>
+                                </div>
+                                */}
+                                <div class="box_basic_top">
+                                    <h3 className="bioHeader">blurb about Goals:</h3>
+                                    <p className="bioContent">
+                                       
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                </details>
                 </div>
 
             </div>
