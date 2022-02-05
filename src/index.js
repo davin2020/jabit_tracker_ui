@@ -9,6 +9,8 @@ import reportWebVitals from './reportWebVitals';
 import HomepageHeader from "./Components/HomepageHeader"
 import LoginPage from "./Components/LoginPage";
 import DashboardPage from "./Components/DashboardPage";
+import RegisterPage from "./Components/RegisterPage";
+
 
 // In react-router-dom v6, "Switch" is replaced by routes "Routes - see https://reactrouter.com/docs/en/v6/upgrading/v5
 // import { Route, Link, BrowserRouter as Router, Switch} from 'react-router-dom';
@@ -38,6 +40,7 @@ class Routing extends React.Component {
 
                             <Route path='/' element={<LoginPage/>} />
                             <Route path='/login' element={<LoginPage/>} />
+                            <Route path='/register' element={<RegisterPage/>} />
                             <Route path='/dashboard' element={<DashboardPage/>} />
                         </Routes>
                     </div>
