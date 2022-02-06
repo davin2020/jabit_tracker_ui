@@ -3,7 +3,7 @@ import HomepageHeader from "../HomepageHeader";
 import './style.css'
 
 //Redirect has been replaced with Navigate
-import { Route, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 // import  UserContext from "../../UserContext";
 
 const PROD_API_URL = 'https://davin-jabit-api.herokuapp.com/graphql';
@@ -14,8 +14,8 @@ class DashboardPage extends React.Component {
         this.state = {
             currentToken: props.accessToken,
             // learners: [],
-            currentUser: ""
-            // usernameState: ""
+            currentUser: "",
+            userid: ""
         }
     }
 
@@ -58,27 +58,82 @@ class DashboardPage extends React.Component {
             return response.json()
         })
         .then((dataObject) => {
+            console.log('dataobject user data ');
+            console.log(dataObject.data);
+            console.log(dataObject.data.user._id);
             //need to verify token when getting  user out of api, in api repo!
             //jwt.verify(token)
             this.setState({
             	currentUser: dataObject.data.user,
-                // learners: dataObject.data.user,
-                // usernameState: userEmail,
-                // bioState: dataObject.data.user.bio,
-                // dreamJobState:  dataObject.data.user.dream_job,
-                // motivationState:  dataObject.data.user.motivation,
-                // fullname:  dataObject.data.user.fullname,
-                // total_points: dataObject.data.user.total_points
+                newGoals: "",
+                userid: dataObject.data.user._id,
             })
         })
 
-            //new stuff here - to get goals for current user
+        //new stuff here - to get goals for current user
+        //fetch goals for current user
+        console.log('pre goal query');
+        // console.log(currentUser._id);
+        console.log(this.state.currentUser._id);
+        console.log('userid: ' + this.state.userid);
+        
+        //ISSUE how to pass deta returned from one GQL quey to another query? esp if i cant nest queries?
+        // goalsByUserid(userid: "${this.state.currentUser._id}") {
+        //hard coded for Marty McFly for now
+        let temp = '61fc511f67cde45b3477dfd9'
+        
+        const queryStringGoals = `
+            query {
+                  goalsByUserid(userid: "${temp}") {
+                    name
+                    target_amount_goal
+                    target_unit
+                    target_amount_completed
+                    points
+                }
+            }
+            `;
+
+        fetch(PROD_API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({query: queryStringGoals})
+        })
+        .then((response) => {
+            return response.json()
+        })
+        .then((dataObject) => {
+        //need to verify token when getting  user out of api, in api repo!
+        //jwt.verify(token)
+            if (!dataObject.errors) {
+                console.log('line ninety four')
+                console.log('dataobject goals data ');
+                console.log(dataObject.data);
+
+                this.setState({
+                    currentGoals: dataObject.data.goal,
+                     // dataObject.data.user,
+                    // currentUser.goals = dataObject.data.goal,
+                    newGoals: dataObject.data.goalsByUserid,
+                })
+                console.log(this.setState.newGoals[0].name);
+            }
+            else {
+                    //TODO add form validation, but alert box works for now
+                    let customError = dataObject.errors[0].message
+                    console.log(customError)
+                    // alert(customError);
+                    return false;
+                }
+        })
+            
             
     } // eof componentDidMount
 
     render() {
-        // localStorage.getItem('email')==null || (localStorage.getItem('access_token')==null)
-        if ( localStorage.getItem('email')==null || localStorage.getItem('access_token')==null || localStorage.getItem('access_token')==undefined ) {
+        if ( localStorage.getItem('email') === null || 
+            localStorage.getItem('access_token') === null || 
+            localStorage.getItem('access_token') === undefined ) {
             //redirecet to /home
             return (<Navigate to="/login" />)
             // 61fc511f67cde45b3477dfd9 tango foxtrot
@@ -109,9 +164,11 @@ class DashboardPage extends React.Component {
                                 </div>
                                 */}
                                 <div className="box_basic_top">
+                                    {/* 
                                     <p className="bioContent">ID: 
-                                        {this.state.currentUser._id}
+                                         {this.state.currentUser._id}
                                     </p>
+                                    */}
 
                                     <h3 className="bioHeader">Fullname:</h3>
                                     <p className="bioContent">
@@ -165,9 +222,19 @@ class DashboardPage extends React.Component {
                                 </div>
                                 */}
                                 <div className="box_basic_top">
-                                    <h3 className="bioHeader">blurb about Goals:</h3>
+                                    <h3 className="bioHeader">Goals will appear here:</h3>
                                     <p className="bioContent">
-                                       
+                                        
+                                        {/* 
+                                            ISSUE not working yet
+                                        {this.state.currentGoals[0].name}
+                                        for each item in array of newGoals
+                                        name
+                                        target_amount_goal
+                                        target_unit
+                                        target_amount_completed
+                                        points
+                                        */}
                                     </p>
                                 </div>
                             </div>
