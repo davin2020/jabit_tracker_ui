@@ -1,13 +1,53 @@
+* {
+	box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #F2F0ED;
+  /*line-height: 1.2rem*/
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+button {
+	background-color: #d2cbc0;
+	padding: 5px;
+	margin: 10px;
+}
+
+.pageBodyContent {
+    margin: 10px;
+}
+
+details {
+	margin: 10px;
+}
+
+details summary { 
+	cursor: pointer;
+	/* will show little twisty arrow next to item */
+	display: list-item;
+	/*this changes the color of the twisty triangle to darker 2B749E  or lighter 67BBEB */
+ 	color: #67BBEB ;
+}
+
+/*. First, I recommend using inline, and not inline-block, as the line wrapping issue still occurs with inline-block when the heading text extends beyond one line.*/
+details summary > * {
+  display: inline;
+}
+
+details > div {
+  /*border: 2px dashed black;*/
+  margin-top: 0;
+  padding: 1rem;
 }
