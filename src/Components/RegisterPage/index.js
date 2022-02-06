@@ -97,7 +97,6 @@ class RegisterPage extends React.Component {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({query: queryStringAddUser})
             }).then((response) => {
-                console.log('DORY ');
                 return response.json()
             })
             .then((dataObject) => {
@@ -105,7 +104,7 @@ class RegisterPage extends React.Component {
                 //need to cheeck if whats returned is an error or valid user?
                 console.log('dataobject data ');
                 console.log(dataObject.data);
-                console.log(dataObject.data.addUser.access_token);
+                // console.log(dataObject.data.addUser.access_token);
 
                 if (!dataObject.errors) {
                     localStorage.clear();
@@ -114,8 +113,8 @@ class RegisterPage extends React.Component {
                     // localStorage.setItem('access_token', this.state.userToken);
                     localStorage.setItem('access_token', dataObject.data.addUser.access_token);
                     
-                    console.log('local storage email ' + inputEmail);
-                    console.log('local storage token ' + this.state.userToken);
+                    // console.log('local storage email ' + inputEmail);
+                    // console.log('local storage token ' + this.state.userToken);
                     //does this need to match login page state, so dashboar can get user out ok then  dispaly ?
                     this.setState({
                         // userToken: dataObject.data.addUser.access_token,
@@ -132,9 +131,8 @@ class RegisterPage extends React.Component {
                 else {
                     //update alert or similar
                     let customError = dataObject.errors[0].message
-                    console.log('ERROR w form ' + customError);
+                    // console.log('ERROR w Register form ' + customError);
                     // alert(customError);
-
                     return false;
                 }
             })
