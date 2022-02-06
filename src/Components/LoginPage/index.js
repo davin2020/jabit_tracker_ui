@@ -102,7 +102,7 @@ class LoginPage extends React.Component {
 					//ths is now NULL when using hosted Heroku backend
 					console.log('dataobject data ');
                 	console.log(dataObject.data);
-                	console.log(dataObject.data.loginEmailAddress.access_token);
+                	// console.log(dataObject.data.loginEmailAddress.access_token);
 
 					//clear previous local storage before setting state for new user!
 					localStorage.clear();
@@ -130,9 +130,10 @@ class LoginPage extends React.Component {
 				}
 				//ELSE theres some issues with the data returned from the query
 				else {
-					//how to deal with this on login page itself? its currently uncaught
-					// throw new Error('Incorrect username or password, please try again')
-					console.log('Incorrect username or password, please try again');
+					//TODO add form validation, but alert box works for now
+					let customError = dataObject.errors[0].message
+                    alert(customError);
+                    return false;
 				}
 			})
 	}
