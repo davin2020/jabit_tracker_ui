@@ -1,21 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+// import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 //my stuff
 // import HomepageHeader from "../HomepageHeader";
-import HomepageHeader from "./Components/HomepageHeader"
+// import HomepageHeader from "./Components/HomepageHeader"
 import LoginPage from "./Components/LoginPage";
 import DashboardPage from "./Components/DashboardPage";
 import RegisterPage from "./Components/RegisterPage";
-
+import GoalPage from "./Components/GoalPage";
 
 // In react-router-dom v6, "Switch" is replaced by routes "Routes - see https://reactrouter.com/docs/en/v6/upgrading/v5
 // import { Route, Link, BrowserRouter as Router, Switch} from 'react-router-dom';
-import { Route, Link, BrowserRouter as Router, Routes} from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes} from 'react-router-dom';
 
+// NOT WORKING AS SOMETHING WRONG W DOTENV PACKAGE
+// require('dotenv').config();
+// console.log('ENV VARS URL ' + process.env.PROD_API_URL);
+// console.log('ENV VARS PORT ' + process.env.PORT);
 
 //protected routes here - if email or token is deleted from local storage, then other pages redirect to /login route
 class Routing extends React.Component {
@@ -44,6 +48,7 @@ class Routing extends React.Component {
                             <Route path='/register' element={<RegisterPage/>} />
                             <Route path='/dashboard' element={<DashboardPage/>} />
                             <Route path='/dashboard#myProfile' element={<DashboardPage/>} />
+                            <Route path='/goals' element={<GoalPage/>} />
                         </Routes>
                     </div>
                 </Router>
