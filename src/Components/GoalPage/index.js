@@ -3,7 +3,7 @@ import HomepageHeader from "../HomepageHeader";
 // import './style.css'
 
 //Redirect has been replaced with Navigate
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 // import  UserContext from "../../UserContext";
 
 const PROD_API_URL = 'https://davin-jabit-api.herokuapp.com/graphql';
@@ -45,6 +45,16 @@ class GoalPage extends React.Component {
         let temp = localStorage.getItem('userid') ;
         console.log('goal userid: ' + temp)
 
+        //try and gets stuff from state on loginpage - undefined, could use local storage for nwo and try getting stuff from state later
+        console.log('checking this.state: ')
+        console.log('checking this.state id: ' + this.state.currentUserid) 
+        console.log('checking this.state email: ' + this.state.currentUserEmail) 
+       
+
+        // currentUserEmail: dataObject.data.email,
+        // currentUserid: dataObject.data.loginEmailAddress._id,
+
+
         const queryStringGoals = `
             query {
                   goalsByUserid(userid: "${temp}") {
@@ -72,6 +82,7 @@ class GoalPage extends React.Component {
                 console.log('line ninety four')
                 console.log('dataobject goals data ');
                 console.log(dataObject.data);
+                //what if there are no goals? below will be NULL
                 console.log(dataObject.data.goalsByUserid[0].name);
 
                 this.setState({
@@ -100,8 +111,11 @@ class GoalPage extends React.Component {
 
     } // eof componentDidMount
 
+    // CHECK  if usersid is nul beforE using it - eg Cast to ObjectId failed for value "null" (type string) at path "userid" for model "goals"
+
     render() {
-        if ( localStorage.getItem('email') === null || 
+        if ( localStorage.getItem('userid') === null || 
+            localStorage.getItem('email') === null || 
             localStorage.getItem('access_token') === null || 
             localStorage.getItem('access_token') === undefined ) {
             //redirecet to /home
@@ -120,8 +134,14 @@ class GoalPage extends React.Component {
                     </div>
 
                 <div className="bioContentContainer dashboardContainer">
-                    {/*  BUG fullnmae is missing here  */}
-                    <h1 className="usernameHeader">Dashboard: {this.state.currentUser.fullname}</h1>
+                    {/*  
+                    BUG fullnmae is missing here - as im not gettgin the whole currentUser out of the DB 
+                    CSS BUG - words are cut off if larger than parent div - cos it was counting Dashboard + email address as one word and keeping all the chars together on one line!
+                    */}
+                    <h1 className="usernameHeader">Dashboard: <wbr></wbr> 
+                         
+                        {localStorage.getItem('email')}
+                    </h1>
 
                         <details open>
                             <summary id="myGoals">
@@ -217,6 +237,8 @@ class GoalPage extends React.Component {
                     </div>
 
                 </details>
+
+                <Link to="/dashboard"><h2 className="section__title">View Profile</h2></Link>
                 </div>
 
             </div>
