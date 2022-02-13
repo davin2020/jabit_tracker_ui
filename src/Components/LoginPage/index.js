@@ -75,6 +75,7 @@ class LoginPage extends React.Component {
 		const queryString = `
 			mutation {
 				loginEmailAddress(email: "${inputUsername}", password: "${inputPassword}" ){
+					_id
 					fullname
 					email
 					dream_job
@@ -108,7 +109,8 @@ class LoginPage extends React.Component {
 					localStorage.clear();
 					// localStorage.setItem('username', inputUsername );
 					localStorage.setItem('email', inputUsername );
-
+					localStorage.setItem('userid', dataObject.data.loginEmailAddress._id );
+					console.log('setting local storage: ' +  dataObject.data.loginEmailAddress._id);
 					// localStorage.setItem('access_token', this.state.userToken);
 					localStorage.setItem('access_token', dataObject.data.loginEmailAddress.access_token);
 
@@ -117,6 +119,7 @@ class LoginPage extends React.Component {
 						// userToken: dataObject.data.email.access_token,
 						learners: dataObject.data.email,
 						currentUserEmail: dataObject.data.email,
+						currentUserid: dataObject.data.loginEmailAddress._id,
 						redirect: true
 					})
 
