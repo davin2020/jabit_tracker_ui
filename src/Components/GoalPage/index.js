@@ -129,19 +129,19 @@ class GoalPage extends React.Component {
 
             return (
                 <div className="pageBodyContent">
-                    <div>
-                        <HomepageHeader /> 
-                    </div>
 
-                <div className="bioContentContainer dashboardContainer">
+              
                     {/*  
                     BUG fullnmae is missing here - as im not gettgin the whole currentUser out of the DB 
                     CSS BUG - words are cut off if larger than parent div - cos it was counting Dashboard + email address as one word and keeping all the chars together on one line!
-                    */}
+                    
+                    <div className="bioContentContainer dashboardContainer">
+
                     <h1 className="usernameHeader">Dashboard: <wbr></wbr> 
                          
                         {localStorage.getItem('email')}
                     </h1>
+                    */}
 
                         <details open>
                             <summary id="myGoals">
@@ -238,8 +238,10 @@ class GoalPage extends React.Component {
 
                 </details>
 
+                {/*
                 <Link to="/dashboard"><h2 className="section__title">View Profile</h2></Link>
                 </div>
+                */}
 
             </div>
             )
