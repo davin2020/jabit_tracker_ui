@@ -14,11 +14,12 @@ Theres a demo available online at - https://jabit-tracker-ui.herokuapp.com/
 - Register a new account
 - Login an existing account
 - View your personal details on the Dashboard page
+- View your goals on the Dashboard page - added 23 Feb
 
 ![User Dashboard](jabit_tracker_dashboard.png)
+<!-- update image to show goals for Marty -->
 
 ## Coming Soon Features
-- View your goals on the dashboard
 - Add a new goal
 - Mark a goal as commpleted
 - Delete a goal
