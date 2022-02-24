@@ -1,9 +1,10 @@
 import React from 'react';
 import HomepageHeader from "../HomepageHeader";
+import GoalPage from "../GoalPage";
 import './style.css'
 
 //Redirect has been replaced with Navigate
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 // import  UserContext from "../../UserContext";
 
 const PROD_API_URL = 'https://davin-jabit-api.herokuapp.com/graphql';
@@ -15,7 +16,9 @@ class DashboardPage extends React.Component {
             currentToken: props.accessToken,
             // learners: [],
             currentUser: "",
-            userid: ""
+            userid: "",
+            newGoals: [],
+            currentGoals: [],
         }
     }
 
@@ -33,6 +36,10 @@ class DashboardPage extends React.Component {
         let userEmail = localStorage.getItem('email') ;
         console.log('DASHBOARD the email is: ' + userEmail);
         // need to ask for ALL the fields that u want access to here!
+        let currentUserid = localStorage.getItem('userid') ;
+        console.log('DASHBOARD currentUserid is: ' + currentUserid);
+        
+        // TRY change this query to get user based on email and all their goals
         const queryString = `
             query {
                 user(email: "${userEmail}") {
@@ -80,8 +87,10 @@ class DashboardPage extends React.Component {
         //ISSUE how to pass deta returned from one GQL quey to another query? esp if i cant nest queries?
         // goalsByUserid(userid: "${this.state.currentUser._id}") {
         //hard coded for Marty McFly for now
-        let temp = '61fc511f67cde45b3477dfd9'
-        
+        // let temp = '61fc511f67cde45b3477dfd9'
+        let temp = localStorage.getItem('userid');
+        console.log('DASH goal userid: ' + temp)
+
         const queryStringGoals = `
             query {
                   goalsByUserid(userid: "${temp}") {
@@ -114,9 +123,11 @@ class DashboardPage extends React.Component {
                     currentGoals: dataObject.data.goal,
                      // dataObject.data.user,
                     // currentUser.goals = dataObject.data.goal,
-                    newGoals: dataObject.data.goalsByUserid,
+                    newGoals: dataObject.data.goalsByUserid
                 })
-                console.log(this.setState.newGoals[0].name);
+                //BUG cannot read proeprty of undefined -casues im susing SETstate instead of just state
+                console.log(this.state.newGoals[0]);
+                // console.log(this.state.newGoals[0].name); 
             }
             else {
                     //TODO add form validation, but alert box works for now
@@ -130,8 +141,16 @@ class DashboardPage extends React.Component {
             
     } // eof componentDidMount
 
+    // TODO try putting goals query here to see ifhtye can now appear on the same page as profiel info - 
+    // CHECK in case userid is null as may have been tampered with in local storage - best to store in state but how? need to check if localstorage userid is null beofre using it inother places - checking for nulll also causes this error msg in console - 
+        // react-dom.development.js:67 Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in the componentWillUnmount method.
+        // at DashboardPage (http://localhost:3033/static/js/bundle.js:36:5)
+        // index.js:134 Cast to ObjectId failed for value "null" (type string) at path "userid" for model "goals"
+
+
     render() {
-        if ( localStorage.getItem('email') === null || 
+        if ( localStorage.getItem('userid') === null || 
+            localStorage.getItem('email') === null || 
             localStorage.getItem('access_token') === null || 
             localStorage.getItem('access_token') === undefined ) {
             //redirecet to /home
@@ -145,6 +164,7 @@ class DashboardPage extends React.Component {
                     <div>
                         <HomepageHeader /> 
                     </div>
+
 
                 <div className="bioContentContainer dashboardContainer">
 
@@ -210,37 +230,57 @@ class DashboardPage extends React.Component {
 
                 <div className="bioContentContainer goalContainer">
                 
+                {/*
+                <Link to="/goals"><h2 className="section__title">View Goals</h2></Link>
+                 */}
+                    <div>
+                        <GoalPage /> 
+                    </div>
+               
+
+                {/* 
                 <details>
                     <summary id="myGoals">
                         <h2 className="section__title">Goals</h2>
                     </summary>
                         <div className="section_parent"> 
                             <div className="section_child">
-                                {/* 
-                                <div className="box_basic_top accent_bkg">
-                                    <h3>stuff</h3>
-                                </div>
-                                */}
+                                
+                                
                                 <div className="box_basic_top">
                                     <h3 className="bioHeader">Goals will appear here:</h3>
+
+                                BUG - NOT WORKING - DESPITE BEING SAME CODE THAT WORKS FINE FOR GOAL PAGE
+                                    <div>
+                                    {this.state.newGoals.map((goal, key) => (
+                                        <React.Fragment key={key}>
+                                            <h4>{goal.name} </h4>
+                                           
+                                        </React.Fragment>
+                                        ) ) }
+                                    </div>
+                                 
+
                                     <p className="bioContent">
                                         
-                                        {/* 
-                                            ISSUE not working yet
-                                        {this.state.currentGoals[0].name}
-                                        for each item in array of newGoals
-                                        name
-                                        target_amount_goal
-                                        target_unit
-                                        target_amount_completed
-                                        points
-                                        */}
+                                        
+                                        ISSUE not working yet
+                                            {this.state.currentGoals[0].name}
+                                            for each item in array of newGoals
+                                            name
+                                            target_amount_goal
+                                            target_unit
+                                            target_amount_completed
+                                            points
+                                        
                                     </p>
                                 </div>
                             </div>
                         </div>
 
                 </details>
+                */}
+
                 </div>
 
             </div>
