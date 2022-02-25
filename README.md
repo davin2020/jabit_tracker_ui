@@ -5,7 +5,7 @@ This is the UI repo for Jabit Tracker, a Job Habit Tracker, created for the Troo
 
 The API for this repo is here - https://github.com/davin2020/jabit_tracker
 
-The idea behind this app is to keep track of job-seeking habits that you can control eg how many applications you submit, or interviews that you attend
+The idea behind this app is to keep track of job-seeking habits that you can control eg how many applications you submit, or interviews that you attend etc.
 
 ## Live Demo
 Theres a demo available online at - https://jabit-tracker-ui.herokuapp.com/
@@ -16,8 +16,8 @@ Theres a demo available online at - https://jabit-tracker-ui.herokuapp.com/
 - View your personal details on the Dashboard page
 - View your goals on the Dashboard page - added 23 Feb
 
-![User Dashboard](jabit_tracker_dashboard.png)
-<!-- update image to show goals for Marty -->
+![Dashboard - User Profile and Goals](jabit_tracker_dashboard_goals.png)
+
 
 ## Coming Soon Features
 - Add a new goal
